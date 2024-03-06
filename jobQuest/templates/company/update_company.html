@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mx-auto" style="width: 40rem;">
+            <div class="card-body">
+                <h5 class="card-title mb-3"> Create a company</h5>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3"> 
+                        <label for="exampleInputEmaila" class="form-label">Company Name</label>
+                        {% render_field form.name class="form-control" %}
+                    
+                    </div>
+                    <div class="mb-3"> 
+                        <label for="exampleInputEmaila" class="form-label">Established Date</label>
+                        {% render_field form.established_date class="form-control" %}
+                        
+                    </div>
+                    <div class="mb-3"> 
+                        <label for="exampleInputEmaila" class="form-label">City</label>
+                        {% render_field form.city class="form-control" %}
+                        
+                    </div>
+                    <div class="mb-3"> 
+                        <label for="exampleInputEmaila" class="form-label">State</label>
+                        {% render_field form.state class="form-control" %}
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Description</label>                        
+                        <textarea class="form-control" id="exampleFormControlTextareal" rows="3"></textarea>                        
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"> Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

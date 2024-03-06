@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>JobQuest</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="{% url 'home' %}">JobQuest</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if request.user.is_authenticated %}
+        {% if request.user.is_applicant %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          {% if request.user.has_resume %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'job-listing'  %}">Apply to jobs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'applied-jobs' %}">Manage Job Applications</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'update-resume' %}">Create resume</a>
+          </li>
+          {% endif %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+        <a href="{% url 'logout' %}" class="btn btn-warning btn-sm ">LogOut</a>
+        {% elif request.user.is_recruiter %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          {% if request.user.has_company %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create-job' %}">Create Job Add</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'manage-jobs' %}">Manage Jobs</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'update-company' %}">Create Company</a>
+          </li>
+          {% endif %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+          
+        </ul>
+        <a href="{% url 'logout' %}" class="btn btn-warning btn-sm ">LogOut</a>
+        {% endif %}
+        {% else %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'job-listing' %}">All Jobs</a>
+          </li>
+
+        </ul>
+        
+        
+        <a href="{% url 'login' %}" class="btn btn-warning btn-sm ">log In</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+      <b>{{message}}</b>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% block content %}
+    {% endblock content %}
+    <!-- <section>
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h2 class="display-5 fw-bold"> Get hiored quickly</h2><br>
+                    <div class="card-group">
+                        <div class="card">
+                            <form class="row gy-2 gx-3 align-items-center">
+                                <div class="col-sm-2">
+                                    <label for="autoSizingInput" class="visually-hidden">Name</label>
+                                    <input type="text" class="form-control" id="autoSizingInput" placeholder="Job Keyword">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="autoSizingInput" class="visually-hidden">select location</label>
+                                    <select id="autoSizingSelect" class="form-select">
+                                        <option selected>Select Location</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="autoSizingInput" class="visually-hidden">choose job type</label>
+                                    <select id="autoSizingSelect" class="form-select">
+                                        <option selected>choose job type</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="autoSizingInput" class="visually-hidden">select industry</label>
+                                    <select id="autoSizingSelect" class="form-select">
+                                        <option selected>select industry</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </div>
+                            </form>
+                </div>
+            </div>
+            <p class="col-md-8 fs-6 mt-3">
+                welcome to jobquest! search and get your dream job
+            </p>
+            <button class="btn btn-outline-primary" type="button">More jobs</button>
+        </section> -->
+
+    <!-- <div class="row row-cols-1 row-cols-md3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        
+                </div>
+                <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="row align-items-center">
+        <div class="col-md-10 mx-auto col-lg-2 mt-4">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2</a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+            </div>
+        </div> -->
+
+  </div>
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
