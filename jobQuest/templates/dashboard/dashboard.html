@@ -6,12 +6,12 @@
 
 {%  if not request.user.has_resume %}
 <div class="alert alert-danger" role="alert">
-    <b>You are seeing this because you have not yet created any resume,<a href="{% url 'update-resume' %}">Create</a> or update to start </b>
+    <b>You are seeing this because you have not yet created any resume,<a href="{% url 'update-resume' %}">Click here to create one</a> </b>
 </div>
 {% endif %}
 <section>
     <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
+        <div class="container-fluid py-5" >
             <h1 class="display-5 fw-bold">welcome to jobquest
             </h1>
             <p class="col-md-8 fs-4">applicant dashboard</p>
@@ -36,7 +36,13 @@
            
 
     </div>
-</section>
+</section>\
+{% else %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Alert!</strong> Invalid request.
+    <a href="{% url 'home' %}" class="btn btn-primary btn">Go to Home Page</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 {% endif %}
 
 {% endblock content %}

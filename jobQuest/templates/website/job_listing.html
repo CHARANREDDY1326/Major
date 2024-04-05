@@ -32,7 +32,12 @@
                 <p class="card-text">Job Location: {{job.location}}</p>
                 <p class="card-text">{{job.salary|intcomma}}</p>
                 <p class="card-text">Posted by: {{job.company}}</p>
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'job-details' job.pk %}" class="btn btn-primary btn">View details</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary btn">View details</a>
+                {% endif %}
+
             </div>
             
             <div class="card-footer">
