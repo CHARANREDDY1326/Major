@@ -31,7 +31,7 @@ class Job(models.Model):
     city = models.CharField(max_length=100)
     salary = models.PositiveIntegerField(default=30000)
     min_experience = models.PositiveIntegerField(default=0)
-    max_experience = models.PositiveIntegerField(default=70)
+    max_experience = models.PositiveIntegerField(default=2)
     requirements = models.TextField()   # skills
     skills = models.TextField()
     is_available = models.BooleanField(default=True)

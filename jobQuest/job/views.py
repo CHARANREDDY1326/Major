@@ -16,8 +16,8 @@ def create_job(request):
                 messages.info(request,'New job has been posted')
                 return redirect('dashboard')
             else:
-                messages.warning(request,'Something went wrong')
-                return redirect('create-job')
+                context = {'form': form}
+                return render(request, 'job/create_job.html', context)
         else:
             form = CreateJobForm()
             context = {'form': form}
