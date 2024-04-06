@@ -30,8 +30,8 @@ class Job(models.Model):
     title = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     salary = models.PositiveIntegerField(default=30000)
-    requirements = models.TextField()
-    ideal_candidate = models.TextField()
+    requirements = models.TextField()   # skills
+    skills = models.TextField()
     is_available = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     industry = models.ForeignKey(Industry, on_delete=models.DO_NOTHING, null=True, blank = True)
