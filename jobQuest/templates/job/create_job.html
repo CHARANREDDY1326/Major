@@ -22,8 +22,18 @@
                         
                     </div>
                     <div class="mb-3"> 
-                        <label for="exampleInputEmaila" class="form-label">City</label>
-                        {% render_field form.city class="form-control" %}
+                        <label for="exampleInputEmaila" class="form-label">Skills</label>
+                        {% render_field form.skills class="form-control" %}
+                        
+                    </div>
+                    <div class="mb-3"> 
+                        <label for="exampleInputEmaila" class="form-label">Min experience</label>
+                        {% render_field form.min_experience class="form-control" %}
+                        
+                    </div>
+                    <div class="mb-3"> 
+                        <label for="exampleInputEmaila" class="form-label">Max experience</label>
+                        {% render_field form.max_experience class="form-control" %}
                         
                     </div>
                     <div class="mb-3"> 
@@ -46,10 +56,7 @@
                         {% render_field form.requirements|attr:"rows:2" class="form-control" %}
                         
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Ideal Candidate</label>                        
-                        {% render_field form.ideal_candidate|attr:"rows:2" class="form-control" %}                        
-                    </div>
+                    
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Is this job available</label>                        
                         {% render_field form.is_available class="form-check-input" %}                        

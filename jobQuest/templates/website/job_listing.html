@@ -30,6 +30,7 @@
                 <h5 class="card-title">{{job.title}}</h5>
 
                 <p class="card-text">Job Location: {{job.location}}</p>
+                <p class="card-text">Experience: {{job.min_experience}}-{{job.max_experience}}</p>
                 <p class="card-text">{{job.salary|intcomma}}</p>
                 <p class="card-text">Posted by: {{job.company}}</p>
                 {% if request.user.is_authenticated %}
